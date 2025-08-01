@@ -1,37 +1,25 @@
 package org.mnessim;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.Scanner;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+
 
 
 class Fetcher {
-    public static String httpGet(String urlStr) throws IOException {
-        URL url = new URL(urlStr);
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("GET");
-        conn.connect();
+    public static int httpGet(String urlStr) throws Exception {
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create(urlStr))
+            .GET()
+            .build();
 
-        int responseCode = conn.getResponseCode();
-        if (responseCode != HttpURLConnection.HTTP_OK) {
-            throw new IOException("HTTP GET Request Failed with Error code : " + responseCode);
-        }
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-        Scanner scanner = new Scanner(conn.getInputStream());
-        StringBuilder response = new StringBuilder();
-        while (scanner.hasNextLine()) {
-            response.append(scanner.nextLine());
-        }
-        scanner.close();
+        System.out.println("Status Code: "+ response.statusCode());
+        System.out.println("Body: " + response.body());
 
-        System.out.println("Response Headers:");
-        conn.getHeaderFields().forEach((key, value) -> {
-            System.out.println(key + ": " + value);
-        });
-
-        conn.disconnect();
-
-        return response.toString();
+        return response.statusCode();
     }
 }

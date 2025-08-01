@@ -15,22 +15,31 @@ class ArgParser {
         }
     }
 
-    private void parse(String input) {
+    private void parse(String input) throws ParseException {
         String[] parts = input.split(" ");
         System.out.println(parts[0]);
         switch (parts.length) {
-            case 1:
-                this.command = parts[0];
-                break;
-            case 2:
+            case 0 -> {
+                throw new ParseException("No input given");
+            }
+            case 1 -> this.command = parts[0];
+            case 2 -> {
                 this.command = parts[0];
                 if (isFlag(parts[1])) {
                     parseFlags(parts[1]);
                 } else {
                     this.arguments = Arrays.copyOfRange(parts, 1, parts.length);
                 }
-            default:
-                break;
+            }
+            default -> {
+                this.command = parts[0];
+                if (isFlag(parts[1])) {
+                    parseFlags(parts[1]);
+                    this.arguments = Arrays.copyOfRange(parts, 2, parts.length);
+                } else {
+                    this.arguments = Arrays.copyOfRange(parts, 1, parts.length);
+                }
+            }
         }
     }
 
@@ -52,5 +61,11 @@ class ArgParser {
 
     public String[] getArguments() {
         return this.arguments;
+    }
+}
+
+class ParseException extends Exception {
+    public ParseException(String message) {
+        super(message);
     }
 }

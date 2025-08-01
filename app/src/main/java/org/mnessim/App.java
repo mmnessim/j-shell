@@ -19,12 +19,13 @@ public class App {
         ArgParser p2 = new ArgParser(commandAndFlag);
         debugPrint(p2);
 
-        try {
-            String resp = Fetcher.httpGet("https://api.chess.com/pub/player/tenderllama");
-            System.out.println(resp);
-        } catch (java.io.IOException e) {
-            System.err.println(e.getMessage());
-        }
+        String commandFlagAndArg = "cat -blorg src/main";
+        ArgParser p3 = new ArgParser(commandFlagAndArg);
+        debugPrint(p3);
+
+        String empty = "";
+        ArgParser p4 = new ArgParser(empty);
+        debugPrint(p4);
     }
 
     private static void debugPrint(ArgParser p) {

@@ -23,7 +23,7 @@ public class App {
             String resp = Fetcher.httpGet("https://api.chess.com/pub/player/tenderllama");
             System.out.println(resp);
         } catch (java.io.IOException e) {
-            e.printStackTrace();
+            System.err.println(e.getMessage());
         }
     }
 
@@ -31,6 +31,20 @@ public class App {
         String c = p.getCommand();
         char[] f = p.getFlags();
         String[] a = p.getArguments();
-        System.out.println("C: " + c + " F: " + f + " A: " + a);
+        System.out.print("C: " + c + " F: [");
+        if (f != null) {
+            for (int i = 0; i < f.length; i++) {
+            System.out.print(f[i]);
+            if (i < f.length - 1) System.out.print(", ");
+            }
+        }
+        System.out.print("] A: [");
+        if (a != null) {
+            for (int i = 0; i < a.length; i++) {
+            System.out.print(a[i]);
+            if (i < a.length - 1) System.out.print(", ");
+            }
+        }
+        System.out.println("]");
     }
 }

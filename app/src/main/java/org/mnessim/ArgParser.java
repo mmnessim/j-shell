@@ -1,0 +1,56 @@
+package org.mnessim;
+
+import java.util.Arrays;
+
+class ArgParser {
+    String command;
+    char[] flags;
+    String[] arguments;
+
+    public ArgParser(String input) {
+        try {
+            parse(input);
+        } catch (Exception e) {
+            System.err.println("Could not parse: "+ e.getMessage());
+        }
+    }
+
+    private void parse(String input) {
+        String[] parts = input.split(" ");
+        System.out.println(parts[0]);
+        switch (parts.length) {
+            case 1:
+                this.command = parts[0];
+                break;
+            case 2:
+                this.command = parts[0];
+                if (isFlag(parts[1])) {
+                    parseFlags(parts[1]);
+                } else {
+                    this.arguments = Arrays.copyOfRange(parts, 1, parts.length);
+                }
+            default:
+                break;
+        }
+    }
+
+    private void parseFlags(String input) {
+        this.flags = input.substring(1).toCharArray();
+    }
+
+    private boolean isFlag(String input) {
+        return input.startsWith("-");
+    }
+
+    public String getCommand() {
+        return this.command;
+    }
+
+    public char[] getFlags() {
+        return this.flags;
+    }
+
+    public String[] getArguments() {
+        return this.arguments;
+    }
+}

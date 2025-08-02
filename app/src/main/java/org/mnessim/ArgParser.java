@@ -11,7 +11,7 @@ class ArgParser {
     public ArgParser(String input) {
         try {
             parse(input);
-        } catch (Exception e) {
+        } catch (ParseException e) {
             System.err.println("Could not parse: "+ e.getMessage());
         }
     }

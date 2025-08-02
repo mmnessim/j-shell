@@ -3,31 +3,27 @@
  */
 package org.mnessim;
 
+import java.util.Scanner;
+
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
-
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
 
-        String command = "cat";
-        ArgParser p = new ArgParser(command);
-        debugPrint(p);
+        String cwd = System.getProperty("user.dir");
+        String PROMPT = cwd + " j-shell: ";
+        Scanner scanner = new Scanner(System.in);
 
-        String commandAndFlag = "cat -afde";
-        ArgParser p2 = new ArgParser(commandAndFlag);
-        debugPrint(p2);
+        while (true) {
+            System.out.print(PROMPT);
+            String input = scanner.nextLine();
 
-        String commandFlagAndArg = "cat -blorg src/main";
-        ArgParser p3 = new ArgParser(commandFlagAndArg);
-        debugPrint(p3);
+            ArgParser p = new ArgParser(input);
 
-        String empty = "";
-        ArgParser p4 = new ArgParser(empty);
-        debugPrint(p4);
+            debugPrint(p);
+            dispatchCommand(p);
+        }
     }
 
+    @SuppressWarnings("unused")
     private static void debugPrint(ArgParser p) {
         String c = p.getCommand();
         char[] f = p.getFlags();
@@ -47,5 +43,18 @@ public class App {
             }
         }
         System.out.println("]");
+    }
+
+    /**
+     * Dispatches various command helper functions.
+     * Prints error message for unrecognized commands
+     *
+     * @param p ArgParser class
+     */
+    private static void dispatchCommand(ArgParser p) {
+        switch (p.getCommand().toLowerCase()) {
+            case "exit" -> System.exit(0);
+            default -> System.out.println("command \"" +p.getCommand() + "\" not recognized");
+        }
     }
 }

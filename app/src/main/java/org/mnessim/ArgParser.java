@@ -7,6 +7,7 @@ class ArgParser {
     char[] flags;
     String[] arguments;
 
+
     public ArgParser(String input) {
         try {
             parse(input);
@@ -15,6 +16,12 @@ class ArgParser {
         }
     }
 
+    /**
+     * Splits input into words and parses into commands, flags, and arguments
+     * Called by ArgParser constructor
+     *
+     * @param input user input
+     */
     private void parse(String input) throws ParseException {
         String[] parts = input.split(" ");
         System.out.println(parts[0]);

@@ -58,6 +58,10 @@ class ArgParser {
         return input.startsWith("-");
     }
 
+    private boolean isRedirect(String input) {
+        return input.startsWith(">");
+    }
+
     public String getCommand() {
         return this.command;
     }

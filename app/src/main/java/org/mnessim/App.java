@@ -54,6 +54,7 @@ public class App {
     private static void dispatchCommand(ArgParser p) {
         switch (p.getCommand().toLowerCase()) {
             case "exit" -> System.exit(0);
+            case "cat" -> System.out.println(ShellFunctions.cat(p));
             default -> System.out.println("command \"" +p.getCommand() + "\" not recognized");
         }
     }

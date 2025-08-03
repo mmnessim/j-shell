@@ -48,3 +48,9 @@ tasks.named<JavaExec>("run") {
     mainClass.set("org.mnessim.App")
     standardInput = System.`in`
 }
+
+tasks.jar {
+    manifest {
+        attributes["Main-Class"] = "org.mnessim.App"
+    }
+}

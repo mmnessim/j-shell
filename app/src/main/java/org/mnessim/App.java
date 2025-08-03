@@ -6,6 +6,17 @@ package org.mnessim;
 import java.util.Scanner;
 
 public class App {
+
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_BLACK = "\u001B[30m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_PURPLE = "\u001B[35m";
+    public static final String ANSI_CYAN = "\u001B[36m";
+    public static final String ANSI_WHITE = "\u001B[37m";
+
     public static void main(String[] args) {
 
         String cwd = System.getProperty("user.dir");
@@ -13,7 +24,7 @@ public class App {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.print(PROMPT);
+            System.out.print(ANSI_CYAN + PROMPT + ANSI_WHITE);
             String input = scanner.nextLine();
 
             ArgParser p = new ArgParser(input);
@@ -54,9 +65,9 @@ public class App {
     private static void dispatchCommand(ArgParser p) {
         switch (p.getCommand().toLowerCase()) {
             case "exit" -> System.exit(0);
-            case "cat" -> System.out.println(ShellFunctions.cat(p));
+            case "cat" -> System.out.println(ANSI_YELLOW + ShellFunctions.cat(p));
             case "" -> {}
-            default -> System.out.println("command \"" + p.getCommand() + "\" not recognized");
+            default -> System.out.println(ANSI_RED + "command \"" + p.getCommand() + "\" not recognized" + ANSI_WHITE);
         }
     }
 }

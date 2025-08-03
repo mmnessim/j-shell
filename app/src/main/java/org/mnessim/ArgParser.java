@@ -24,7 +24,7 @@ class ArgParser {
      */
     private void parse(String input) throws ParseException {
         String[] parts = input.split(" ");
-        System.out.println(parts[0]);
+        //System.out.println(parts[0]);
         switch (parts.length) {
             case 0 -> {
                 throw new ParseException("No input given");

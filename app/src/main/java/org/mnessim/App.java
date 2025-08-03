@@ -55,7 +55,8 @@ public class App {
         switch (p.getCommand().toLowerCase()) {
             case "exit" -> System.exit(0);
             case "cat" -> System.out.println(ShellFunctions.cat(p));
-            default -> System.out.println("command \"" +p.getCommand() + "\" not recognized");
+            case "" -> {}
+            default -> System.out.println("command \"" + p.getCommand() + "\" not recognized");
         }
     }
 }

@@ -18,7 +18,7 @@ public class App {
 
             ArgParser p = new ArgParser(input);
 
-            debugPrint(p);
+            //debugPrint(p);
             dispatchCommand(p);
         }
     }

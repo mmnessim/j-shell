@@ -23,6 +23,8 @@ public class App {
         String PROMPT = cwd + " j-shell: ";
         Scanner scanner = new Scanner(System.in);
 
+        System.out.println(ANSI_PURPLE + ShellFunctions.getInfo());
+
         while (true) {
             System.out.print(ANSI_CYAN + PROMPT + ANSI_WHITE);
             String input = scanner.nextLine();
@@ -42,32 +44,42 @@ public class App {
         System.out.print("C: " + c + " F: [");
         if (f != null) {
             for (int i = 0; i < f.length; i++) {
-            System.out.print(f[i]);
-            if (i < f.length - 1) System.out.print(", ");
+                System.out.print(f[i]);
+                if (i < f.length - 1) {
+                    System.out.print(", ");
+                }
             }
         }
         System.out.print("] A: [");
         if (a != null) {
             for (int i = 0; i < a.length; i++) {
-            System.out.print(a[i]);
-            if (i < a.length - 1) System.out.print(", ");
+                System.out.print(a[i]);
+                if (i < a.length - 1) {
+                    System.out.print(", ");
+                }
             }
         }
         System.out.println("]");
     }
 
     /**
-     * Dispatches various command helper functions.
-     * Prints error message for unrecognized commands
+     * Dispatches various command helper functions. Prints error message for
+     * unrecognized commands
      *
      * @param p ArgParser class
      */
     private static void dispatchCommand(ArgParser p) {
         switch (p.getCommand().toLowerCase()) {
-            case "exit" -> System.exit(0);
-            case "cat" -> System.out.println(ANSI_YELLOW + ShellFunctions.cat(p));
-            case "" -> {}
-            default -> System.out.println(ANSI_RED + "command \"" + p.getCommand() + "\" not recognized" + ANSI_WHITE);
+            case "exit" ->
+                System.exit(0);
+            case "cat" ->
+                System.out.println(ANSI_YELLOW + ShellFunctions.cat(p));
+            case "sysinfo" -> 
+                System.out.println(ANSI_PURPLE + ShellFunctions.getInfo());
+            case "" -> {
+            }
+            default ->
+                System.out.println(ANSI_RED + "command \"" + p.getCommand() + "\" not recognized" + ANSI_WHITE);
         }
     }
 }

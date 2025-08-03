@@ -1,19 +1,18 @@
 package org.mnessim;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import java.io.IOException;
 
 class ShellFunctions {
 
     /**
-     * Implementation of cat builtin function
-     * Displays the contents of a file to the terminal output
+     * Implementation of cat builtin function Displays the contents of a file to
+     * the terminal output
      *
-     * TODO:
-     * Implement flags to add functionality
-     * handle multiple arguments maybe
+     * TODO: Implement flags to add functionality handle multiple arguments
+     * maybe
      *
      * @param p ArgParser class
      */
@@ -48,8 +47,37 @@ class ShellFunctions {
         } else {
             for (String line : lines) {
                 contents = contents.concat(line + "\n");
-            }   
+            }
         }
+        return contents;
+    }
+
+    /**
+     * Display operating system and JVM info Arguments and flags not implemented
+     * yet...
+     */
+    public static String getInfo() {
+        var os = System.getProperty("os.name");
+        var version = System.getProperty("os.version");
+        var arch = System.getProperty("os.arch");
+
+        String contents = os + " " + version + " " + arch;
+
+        Runtime runtime = Runtime.getRuntime();
+
+        long totalMemory = runtime.totalMemory() / (1024 * 1024);
+        long freeMemory = runtime.freeMemory() / (1024 * 1024);
+        long maxMemory = runtime.maxMemory() / (1024 * 1024);
+        long usedMemory = totalMemory - freeMemory;
+
+        contents = contents.concat("\nJVM Memory Usage: " + totalMemory + " MB\nFree: " + freeMemory + " MB\nUsed: " + usedMemory + " MB\nMax: " + maxMemory + " MB");
+
+        System.out.println("JVM Memory Usage:");
+        System.out.println("Total Memory (bytes): " + totalMemory);
+        System.out.println("Free Memory (bytes): " + freeMemory);
+        System.out.println("Used Memory (bytes): " + usedMemory);
+        System.out.println("Max Memory (bytes): " + maxMemory);
+
         return contents;
     }
 

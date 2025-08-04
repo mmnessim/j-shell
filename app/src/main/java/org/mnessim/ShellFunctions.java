@@ -81,4 +81,30 @@ class ShellFunctions {
         return contents;
     }
 
+    public static String help() {
+        String helpMessage = """
+        Welcome to J-Shell: A Java based Shell emulator
+        Commands:
+            help -> display this help message
+            sysinfo -> display OS info and JVM memory usage
+            cat -> display file contents
+                [-n] include line numbers
+            exit -> exit the terminal
+
+        TODO: These commands are not yet implemented:
+            ls -> display contents of a directory
+            touch -> create a new file
+            >> -> write output of command to a file
+            rm -> remove file or directory
+            | -> pipe output of command into input of another
+            cd -> change directory
+            pwd -> print working directory
+        
+        Written by Mounir Nessim
+        mmnessim@gmail.com https://github.com/mmnessim
+        """;
+
+        return helpMessage;
+    }
+
 }

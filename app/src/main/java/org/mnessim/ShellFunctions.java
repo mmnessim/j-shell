@@ -26,7 +26,7 @@ class ShellFunctions {
             boolean flag = p.getFlags() != null && new String(p.getFlags()).indexOf('n') != -1;
             for (String arg : p.getArguments()) {
                 contents = getFileLines(arg, contents, flag);
-                contents = contents.concat("\n");
+                //contents = contents.concat("\n");
             }
 
             //contents = getFileLines(p.arguments[0], contents, flag);
@@ -72,11 +72,11 @@ class ShellFunctions {
 
         contents = contents.concat("\nJVM Memory Usage: " + totalMemory + " MB\nFree: " + freeMemory + " MB\nUsed: " + usedMemory + " MB\nMax: " + maxMemory + " MB");
 
-        System.out.println("JVM Memory Usage:");
-        System.out.println("Total Memory (bytes): " + totalMemory);
-        System.out.println("Free Memory (bytes): " + freeMemory);
-        System.out.println("Used Memory (bytes): " + usedMemory);
-        System.out.println("Max Memory (bytes): " + maxMemory);
+        //System.out.println("JVM Memory Usage:");
+        //System.out.println("Total Memory (bytes): " + totalMemory);
+        //System.out.println("Free Memory (bytes): " + freeMemory);
+        //System.out.println("Used Memory (bytes): " + usedMemory);
+        //System.out.println("Max Memory (bytes): " + maxMemory);
 
         return contents;
     }
@@ -99,7 +99,7 @@ class ShellFunctions {
             | -> pipe output of command into input of another
             cd -> change directory
             pwd -> print working directory
-        
+
         Written by Mounir Nessim
         mmnessim@gmail.com https://github.com/mmnessim
         """;

@@ -39,13 +39,16 @@
             zlib
           ];
 
-          shellHook =
+            shellHook =
             let
               loadLombok = "-javaagent:${pkgs.lombok}/share/java/lombok.jar";
               prev = "\${JAVA_TOOL_OPTIONS:+ $JAVA_TOOL_OPTIONS}";
+              # With ansi green color code for the prompt
+              nixPrompt = "\\033[0;32m(nix-shell) \\w\\033[0m ";
             in
             ''
               export JAVA_TOOL_OPTIONS="${loadLombok}${prev}"
+              export PS1="${nixPrompt}"
             '';
         };
       });

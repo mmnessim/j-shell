@@ -20,7 +20,7 @@ public class App {
     public static void main(String[] args) {
 
         String cwd = System.getProperty("user.dir");
-        String PROMPT = ANSI_CYAN + cwd + " j-shell: ";
+        String PROMPT = ANSI_CYAN + cwd + "::j-shell$ ";
         Scanner scanner = new Scanner(System.in);
 
         System.out.println(ANSI_PURPLE + ShellFunctions.getInfo());
@@ -78,6 +78,8 @@ public class App {
                 System.out.println(ANSI_PURPLE + ShellFunctions.getInfo());
             case "help" ->
                 System.out.println(ANSI_GREEN + ShellFunctions.help());
+            case "ls" ->
+                System.out.println(ANSI_YELLOW + ShellFunctions.LS(p));
             case "" -> {
             }
             default ->

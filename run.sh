@@ -9,6 +9,10 @@ if [ $# -eq 0 ]; then
     java -cp app/build/classes/java/main org.mnessim.App
 fi
 
+if [ "$1" == "run" ]; then
+    java -cp app/build/classes/java/main org.mnessim.App
+fi
+
 if [ "$1" == "test" ]; then
     ./gradlew test --info
 fi

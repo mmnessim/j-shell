@@ -1,8 +1,10 @@
 package org.mnessim;
 
 import java.io.IOException;
+import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 class ShellFunctions {
@@ -79,6 +81,31 @@ class ShellFunctions {
         //System.out.println("Max Memory (bytes): " + maxMemory);
 
         return contents;
+    }
+
+    public static String LS(ArgParser p) {
+        String contents = "";
+        String pathString;
+        if (p.arguments == null) {
+            pathString = ".";
+        } else {
+            pathString = p.getArguments()[0];
+        }
+
+        Path dir = Paths.get(pathString);
+
+        try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir)) {
+            for (Path entry : stream) {
+                if (Files.isDirectory(entry)) {
+                    contents = contents.concat("\u001B[32m  " + entry.getFileName().toString() + "\u001B[33m\n");
+                    continue;
+                }
+                contents = contents.concat(entry.getFileName().toString() + "\n");
+            }
+            return contents;
+        } catch (Exception e) {
+            return e.getMessage();
+        }
     }
 
     public static String help() {
